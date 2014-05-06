@@ -10,9 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.tiarsoft.tutorialesbox2d.tutoriales.TutorialNo4;
-import com.tiarsoft.tutorialesbox2d.tutoriales.TutorialNo5;
-import com.tiarsoft.tutorialesbox2d.tutoriales.TutorialNo6;
+import com.tiarsoft.tutorialbox2d.tutoriales.TutorialNo4;
+import com.tiarsoft.tutorialbox2d.tutoriales.TutorialNo5;
+import com.tiarsoft.tutorialbox2d.tutoriales.TutorialNo6;
 
 /**
  * Puedes encontrar este tutorial en mi blog: http://tutoriales.tiarsoft.com/
@@ -69,13 +69,20 @@ public class MainMenuScreen extends Screens {
 
 	private void newScreen(Class<? extends Screens> screenClass) {
 
-		try {
-			game.setScreen(screenClass.getConstructor(MainBox2d.class)
-					.newInstance(game));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		// try {
+		// game.setScreen(screenClass.getConstructor(MainBox2d.class)
+		// .newInstance(game));
+		// }
+		// catch (Exception e) {
+		// e.printStackTrace();
+		// }
+
+		if (screenClass == TutorialNo4.class)
+			game.setScreen(new TutorialNo4(game));
+		else if (screenClass == TutorialNo5.class)
+			game.setScreen(new TutorialNo5(game));
+		else if (screenClass == TutorialNo6.class)
+			game.setScreen(new TutorialNo6(game));
 
 	}
 

@@ -7,13 +7,13 @@ import com.tiarsoft.tutorialbox2d.MainBox2d;
 
 public class HtmlLauncher extends GwtApplication {
 
-        @Override
-        public GwtApplicationConfiguration getConfig () {
-                return new GwtApplicationConfiguration(480, 320);
-        }
+	@Override
+	public GwtApplicationConfiguration getConfig() {
+		return new GwtApplicationConfiguration(650, 390);
+	}
 
-        @Override
-        public ApplicationListener getApplicationListener () {
-                return new MainBox2d();
-        }
+	@Override
+	public ApplicationListener getApplicationListener() {
+		return new MainBox2d();
+	}
 }

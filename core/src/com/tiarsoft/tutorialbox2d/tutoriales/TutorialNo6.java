@@ -1,4 +1,4 @@
-package com.tiarsoft.tutorialesbox2d.tutoriales;
+package com.tiarsoft.tutorialbox2d.tutoriales;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
