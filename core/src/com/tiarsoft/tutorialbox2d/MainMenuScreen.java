@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.tiarsoft.tutorialbox2d.tutoriales.TutorialNo4;
 import com.tiarsoft.tutorialbox2d.tutoriales.TutorialNo5;
 import com.tiarsoft.tutorialbox2d.tutoriales.TutorialNo6;
+import com.tiarsoft.tutorialbox2d.tutoriales.TutorialNo7;
 
 /**
  * Puedes encontrar este tutorial en mi blog: http://tutoriales.tiarsoft.com/
@@ -28,7 +29,8 @@ public class MainMenuScreen extends Screens {
 			Arrays.asList(//
 					TutorialNo4.class,//
 					TutorialNo5.class,//
-					TutorialNo6.class//
+					TutorialNo6.class,//
+					TutorialNo7.class//
 			));
 
 	ScrollPane scroll;
@@ -83,6 +85,8 @@ public class MainMenuScreen extends Screens {
 			game.setScreen(new TutorialNo5(game));
 		else if (screenClass == TutorialNo6.class)
 			game.setScreen(new TutorialNo6(game));
+		else if (screenClass == TutorialNo7.class)
+			game.setScreen(new TutorialNo7(game));
 
 	}
 
