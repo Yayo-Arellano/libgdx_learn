@@ -15,7 +15,7 @@ import com.tiarsoft.tutorialbox2d.MainBox2d;
 import com.tiarsoft.tutorialbox2d.Screens;
 
 /**
- * Tipos de cuerpos: Dinamicos, estaticos y cinematicos
+ * Fuerzas, impulsos y velocidad lineal.
  * 
  * Puedes encontrar este tutorial en mi blog: http://tutoriales.tiarsoft.com/
  * 
