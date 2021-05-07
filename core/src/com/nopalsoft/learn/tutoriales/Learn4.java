@@ -23,7 +23,7 @@ import com.nopalsoft.learn.Screens;
  * 
  */
 
-public class TutorialNo7 extends Screens {
+public class Learn4 extends Screens {
 
 	Box2DDebugRenderer renderer;
 	World oWorld;
@@ -38,7 +38,7 @@ public class TutorialNo7 extends Screens {
 	 */
 	Vector2 velocidad = new Vector2(0, 8);
 
-	public TutorialNo7(MainLearn game) {
+	public Learn4(MainLearn game) {
 		super(game);
 		Vector2 gravedad = new Vector2(0, -9.8f);
 		boolean dormir = true;
@@ -168,12 +168,12 @@ public class TutorialNo7 extends Screens {
 	@Override
 	public void draw(float delta) {
 		oCamUI.update();
-		batcher.setProjectionMatrix(oCamUI.combined);
+		spriteBatch.setProjectionMatrix(oCamUI.combined);
 
-		batcher.begin();
-		Assets.font.draw(batcher, "Fps:" + Gdx.graphics.getFramesPerSecond(),
+		spriteBatch.begin();
+		Assets.font.draw(spriteBatch, "Fps:" + Gdx.graphics.getFramesPerSecond(),
 				0, 20);
-		batcher.end();
+		spriteBatch.end();
 
 		oCamBox2D.update();
 		renderer.render(oWorld, oCamBox2D.combined);

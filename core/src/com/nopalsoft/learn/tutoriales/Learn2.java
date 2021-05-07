@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -15,7 +16,7 @@ import com.nopalsoft.learn.MainLearn;
 import com.nopalsoft.learn.Screens;
 
 /**
- * Tipos de cuerpos: Dinamicos, estaticos y cinematicos
+ * Friccion, densidad y restitucion
  * 
  * Puedes encontrar este tutorial en mi blog: http://tutoriales.tiarsoft.com/
  * 
@@ -23,56 +24,76 @@ import com.nopalsoft.learn.Screens;
  * 
  */
 
-public class TutorialNo6 extends Screens {
+public class Learn2 extends Screens {
 
 	Box2DDebugRenderer renderer;
 	World oWorld;
 
-	public TutorialNo6(MainLearn game) {
+	public Learn2(MainLearn game) {
 		super(game);
 		Vector2 gravedad = new Vector2(0, -9.8f);
 		boolean dormir = true;
 		oWorld = new World(gravedad, dormir);
 		renderer = new Box2DDebugRenderer();
 
-		crearCaja();
-		crearPiso();
+		crearDynamic();
+		crearStatic();
+		crearKinematic();
 	}
 
-	private void crearPiso() {
+	private void crearStatic() {
 		BodyDef bd = new BodyDef();
 		bd.position.set(0, .5f);
 		bd.type = BodyType.StaticBody;
 
 		EdgeShape shape = new EdgeShape();
-		shape.set(0, 0, WORLD_WIDTH, 1.5f);
+		shape.set(0, 0, WORLD_WIDTH, 0);
 
 		FixtureDef fixDef = new FixtureDef();
 		fixDef.shape = shape;
-		fixDef.friction = .7f;
 
 		Body oBody = oWorld.createBody(bd);
 		oBody.createFixture(fixDef);
+
 		shape.dispose();
+
 	}
 
-	private void crearCaja() {
+	private void crearKinematic() {
 		BodyDef bd = new BodyDef();
-		bd.position.set(7, 4);
-		bd.type = BodyType.DynamicBody;
+		bd.position.set(4, 1.5f);
+		bd.type = BodyType.KinematicBody;
 
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(.2f, .2f);
+		shape.setAsBox(.1f, .75f);
 
 		FixtureDef fixDef = new FixtureDef();
 		fixDef.shape = shape;
-		fixDef.density = 1f;
-		fixDef.friction = 0f;
-		fixDef.restitution = 01f;
 
 		Body oBody = oWorld.createBody(bd);
 		oBody.createFixture(fixDef);
+
 		shape.dispose();
+
+		/*
+		 * Hara que nuestro cuerpo kinematico gire en sentido contrario de las manecillas del reloj
+		 */
+		oBody.setAngularVelocity((float) Math.toRadians(360));
+	}
+
+	private void crearDynamic() {
+		BodyDef bd = new BodyDef();
+		bd.position.set(4, 4.5f);
+		bd.type = BodyType.DynamicBody;
+
+		CircleShape shape = new CircleShape();
+		shape.setRadius(.25f);
+
+		FixtureDef fixDef = new FixtureDef();
+		fixDef.shape = shape;
+
+		Body oBody = oWorld.createBody(bd);
+		oBody.createFixture(fixDef);
 	}
 
 	@Override
@@ -84,12 +105,12 @@ public class TutorialNo6 extends Screens {
 	@Override
 	public void draw(float delta) {
 		oCamUI.update();
-		batcher.setProjectionMatrix(oCamUI.combined);
+		spriteBatch.setProjectionMatrix(oCamUI.combined);
 
-		batcher.begin();
-		Assets.font.draw(batcher, "Fps:" + Gdx.graphics.getFramesPerSecond(),
+		spriteBatch.begin();
+		Assets.font.draw(spriteBatch, "Fps:" + Gdx.graphics.getFramesPerSecond(),
 				0, 20);
-		batcher.end();
+		spriteBatch.end();
 
 		oCamBox2D.update();
 		renderer.render(oWorld, oCamBox2D.combined);

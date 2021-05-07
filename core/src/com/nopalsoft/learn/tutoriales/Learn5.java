@@ -30,7 +30,7 @@ import com.nopalsoft.learn.Screens;
  * 
  */
 
-public class TutorialNo8 extends Screens {
+public class Learn5 extends Screens {
 
 	Box2DDebugRenderer renderer;
 	World oWorld;
@@ -50,7 +50,7 @@ public class TutorialNo8 extends Screens {
 	 */
 	TextureRegion pelota, caja;
 
-	public TutorialNo8(MainLearn game) {
+	public Learn5(MainLearn game) {
 		super(game);
 		Vector2 gravedad = new Vector2(0, -9.8f);
 		boolean dormir = true;
@@ -171,24 +171,24 @@ public class TutorialNo8 extends Screens {
 	@Override
 	public void draw(float delta) {
 		oCamUI.update();
-		batcher.setProjectionMatrix(oCamUI.combined);
+		spriteBatch.setProjectionMatrix(oCamUI.combined);
 
-		batcher.begin();
-		Assets.font.draw(batcher, "Toca la pantalla para crear mas figuras", 0,
+		spriteBatch.begin();
+		Assets.font.draw(spriteBatch, "Toca la pantalla para crear mas figuras", 0,
 				470);
 
-		Assets.font.draw(batcher, "Fps:" + Gdx.graphics.getFramesPerSecond(),
+		Assets.font.draw(spriteBatch, "Fps:" + Gdx.graphics.getFramesPerSecond(),
 				0, 20);
-		batcher.end();
+		spriteBatch.end();
 
 		oCamBox2D.update();
 
-		batcher.setProjectionMatrix(oCamBox2D.combined);
-		batcher.begin();
+		spriteBatch.setProjectionMatrix(oCamBox2D.combined);
+		spriteBatch.begin();
 
 		drawFiguras();
 
-		batcher.end();
+		spriteBatch.end();
 		renderer.render(oWorld, oCamBox2D.combined);
 
 	}
@@ -204,7 +204,7 @@ public class TutorialNo8 extends Screens {
 			else
 				keyframe = pelota;
 
-			batcher.draw(keyframe, obj.position.x - .15f,
+			spriteBatch.draw(keyframe, obj.position.x - .15f,
 					obj.position.y - .15f, .15f, .15f, .3f, .3f, 1, 1,
 					obj.angleDeg);
 
