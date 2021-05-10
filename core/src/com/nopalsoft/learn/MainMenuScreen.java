@@ -9,11 +9,12 @@ import com.nopalsoft.learn.tutoriales.*;
 import com.nopalsoft.learn.utils.Learn;
 
 /**
- * Puedes encontrar este tutorial en mi blog: http://tutoriales.tiarsoft.com/
+ * Learn more about libGDX:
+ * My personal blog (spanish): https://tinyurl.com/yw5hawc2
+ * Youtube video course: https://tinyurl.com/ytunwuad
  *
- * @author Gerardo Arellano
+ * @author Yayo Arellano
  */
-
 
 public class MainMenuScreen extends Screens {
 
@@ -36,14 +37,13 @@ public class MainMenuScreen extends Screens {
             });
 
             menu.row().padTop(20).height(50);
-            menu.add(bt);
+            menu.add(bt).fillX();
         }
 
         scroll = new ScrollPane(menu, Assets.scrollPaneStyle);
         scroll.setSize(500, SCREEN_HEIGHT);
         scroll.setPosition(150, 0);
         stage.addActor(scroll);
-        stage.setDebugAll(true);
     }
 
     private Screens getScreen(Learn learn) {

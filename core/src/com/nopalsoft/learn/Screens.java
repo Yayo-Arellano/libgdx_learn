@@ -11,6 +11,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
+/**
+ * Learn more about libGDX:
+ * My personal blog (spanish): https://tinyurl.com/yw5hawc2
+ * Youtube video course: https://tinyurl.com/ytunwuad
+ *
+ * @author Yayo Arellano
+ */
+
 public abstract class Screens extends InputAdapter implements Screen {
     public static final float SCREEN_WIDTH = 800;
     public static final float SCREEN_HEIGHT = 480;

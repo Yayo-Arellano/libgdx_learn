@@ -1,7 +1,5 @@
 package com.nopalsoft.learn.tutoriales;
 
-import java.util.Iterator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -22,214 +20,198 @@ import com.nopalsoft.learn.MainLearn;
 import com.nopalsoft.learn.Screens;
 
 /**
- * Cuerpos y Sprites (Imagenes)
- * 
- * Puedes encontrar este tutorial en mi blog: http://tutoriales.tiarsoft.com/
- * 
- * @author Gerardo Arellano
- * 
+ * Learn more about libGDX:
+ * My personal blog (spanish): https://tinyurl.com/yw5hawc2
+ * Youtube video course: https://tinyurl.com/ytunwuad
+ *
+ * @author Yayo Arellano
  */
 
 public class Learn5 extends Screens {
 
-	Box2DDebugRenderer renderer;
-	World oWorld;
+    Box2DDebugRenderer renderer;
+    World oWorld;
 
-	/**
-	 * Esta lista va almacenar todos los cuerpos que creemos en nuestro mundo
-	 */
-	Array<Body> arrBodies;
+    // Save the bodies so later we can access the properties
+    Array<Body> arrBodies;
 
-	/**
-	 * Esta lista va almacenar todos los objetos figura que creemos
-	 */
-	Array<Figura> arrFiguras;
+    Array<GameObject> arrGameObjects;
 
-	/**
-	 * Imagenes de la pelota y la caja.
-	 */
-	TextureRegion pelota, caja;
+    // Images of the ball and box
+    TextureRegion ball, box;
 
-	public Learn5(MainLearn game) {
-		super(game);
-		Vector2 gravedad = new Vector2(0, -9.8f);
-		boolean dormir = true;
-		oWorld = new World(gravedad, dormir);
-		renderer = new Box2DDebugRenderer();
-		arrBodies = new Array<Body>();
-		arrFiguras = new Array<Figura>();
+    public Learn5(MainLearn game) {
+        super(game);
+        Vector2 gravity = new Vector2(0, -9.8f);
+        oWorld = new World(gravity, true);
 
-		/**
-		 * Cargamos las imagenes
-		 */
-		pelota = new TextureRegion(new Texture(
-				Gdx.files.internal("data/pelota.png")));
-		caja = new TextureRegion(new Texture(
-				Gdx.files.internal("data/caja.png")));
+        renderer = new Box2DDebugRenderer();
+        arrBodies = new Array<>();
+        arrGameObjects = new Array<>();
 
-		crearPiso();
-		crearPelota();
-		crearCaja();
-	}
+        // Load the images
+        ball = new TextureRegion(new Texture(Gdx.files.internal("data/pelota.png")));
+        box = new TextureRegion(new Texture(Gdx.files.internal("data/caja.png")));
 
-	/**
-	 * Creamos el piso
-	 */
-	private void crearPiso() {
-		BodyDef bd = new BodyDef();
-		bd.position.set(0, .6f);
-		bd.type = BodyType.StaticBody;
+        createFloor();
+        createBall();
+        createBox();
+    }
 
-		EdgeShape shape = new EdgeShape();
-		shape.set(0, 0, WORLD_WIDTH, 0);
+    private void createFloor() {
+        BodyDef bd = new BodyDef();
+        bd.position.set(0, .6f);
+        bd.type = BodyType.StaticBody;
 
-		FixtureDef fixDef = new FixtureDef();
-		fixDef.shape = shape;
-		fixDef.friction = .7f;
+        EdgeShape shape = new EdgeShape();
+        shape.set(0, 0, WORLD_WIDTH, 0);
 
-		Body oBody = oWorld.createBody(bd);
-		oBody.createFixture(fixDef);
-		shape.dispose();
-	}
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+        fixDef.friction = .7f;
 
-	private void crearPelota() {
-		Figura obj = new Figura(4, 5, Figura.TIPO_PELOTA);
+        Body oBody = oWorld.createBody(bd);
+        oBody.createFixture(fixDef);
+        shape.dispose();
+    }
 
-		BodyDef bd = new BodyDef();
-		bd.position.x = obj.position.x;
-		bd.position.y = obj.position.y;
-		bd.type = BodyType.DynamicBody;
+    private void createBall() {
+        GameObject obj = new GameObject(4, 5, GameObject.BALL);
 
-		CircleShape shape = new CircleShape();
-		shape.setRadius(.15f);
+        BodyDef bd = new BodyDef();
+        bd.position.x = obj.position.x;
+        bd.position.y = obj.position.y;
+        bd.type = BodyType.DynamicBody;
 
-		FixtureDef fixDef = new FixtureDef();
-		fixDef.shape = shape;
-		fixDef.density = 15;
-		fixDef.friction = .5f;
-		fixDef.restitution = .5f;
+        CircleShape shape = new CircleShape();
+        shape.setRadius(.15f);
 
-		Body oBody = oWorld.createBody(bd);
-		oBody.createFixture(fixDef);
-		oBody.setUserData(obj);
-		arrFiguras.add(obj);
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+        fixDef.density = 15;
+        fixDef.friction = .5f;
+        fixDef.restitution = .5f;
 
-		shape.dispose();
-	}
+        Body oBody = oWorld.createBody(bd);
+        oBody.createFixture(fixDef);
+        oBody.setUserData(obj);
+        arrGameObjects.add(obj);
 
-	private void crearCaja() {
-		Figura obj = new Figura(4, 5, Figura.TIPO_CAJA);
+        shape.dispose();
+    }
 
-		BodyDef bd = new BodyDef();
-		bd.position.x = obj.position.x;
-		bd.position.y = obj.position.y;
-		bd.type = BodyType.DynamicBody;
+    private void createBox() {
+        GameObject obj = new GameObject(4, 5, GameObject.BOX);
 
-		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(.15f, .15f);
+        BodyDef bd = new BodyDef();
+        bd.position.x = obj.position.x;
+        bd.position.y = obj.position.y;
+        bd.type = BodyType.DynamicBody;
 
-		FixtureDef fixDef = new FixtureDef();
-		fixDef.shape = shape;
-		fixDef.density = 15;
-		fixDef.friction = .5f;
-		fixDef.restitution = .1f;
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(.15f, .15f);
 
-		Body oBody = oWorld.createBody(bd);
-		oBody.createFixture(fixDef);
-		oBody.setUserData(obj);
-		arrFiguras.add(obj);
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+        fixDef.density = 15;
+        fixDef.friction = .5f;
+        fixDef.restitution = .1f;
 
-		shape.dispose();
-	}
+        Body oBody = oWorld.createBody(bd);
+        oBody.createFixture(fixDef);
+        oBody.setUserData(obj);
+        arrGameObjects.add(obj);
 
-	@Override
-	public void update(float delta) {
-		if (Gdx.input.justTouched()) {
-			if (MathUtils.randomBoolean())
-				crearCaja();
-			else
-				crearPelota();
-		}
+        shape.dispose();
+    }
 
-		oWorld.step(delta, 8, 6);
+    @Override
+    public void update(float delta) {
+        if (Gdx.input.justTouched()) {
+            if (MathUtils.randomBoolean())
+                createBox();
+            else
+                createBall();
+        }
 
-		oWorld.getBodies(arrBodies);
+        oWorld.step(delta, 8, 6);
 
-		Iterator<Body> i = arrBodies.iterator();
-		while (i.hasNext()) {
-			Body body = i.next();
-			if (body.getUserData() instanceof Figura) {
-				Figura obj = (Figura) body.getUserData();
-				obj.update(body);
+        oWorld.getBodies(arrBodies);
 
-			}
+        for (Body body : arrBodies) {
+            if (body.getUserData() instanceof GameObject) {
+                GameObject obj = (GameObject) body.getUserData();
+                obj.update(body);
+            }
+        }
+    }
 
-		}
+    @Override
+    public void draw(float delta) {
+        oCamUI.update();
+        spriteBatch.setProjectionMatrix(oCamUI.combined);
 
-	}
+        spriteBatch.begin();
+        Assets.font.draw(spriteBatch, "Touch the screen to create more objects", 0, 470);
+        Assets.font.draw(spriteBatch, "fps:" + Gdx.graphics.getFramesPerSecond(), 0, 20);
+        spriteBatch.end();
 
-	@Override
-	public void draw(float delta) {
-		oCamUI.update();
-		spriteBatch.setProjectionMatrix(oCamUI.combined);
+        oCamBox2D.update();
 
-		spriteBatch.begin();
-		Assets.font.draw(spriteBatch, "Toca la pantalla para crear mas figuras", 0,
-				470);
+        spriteBatch.setProjectionMatrix(oCamBox2D.combined);
+        spriteBatch.begin();
 
-		Assets.font.draw(spriteBatch, "Fps:" + Gdx.graphics.getFramesPerSecond(),
-				0, 20);
-		spriteBatch.end();
+        drawGameObjects();
 
-		oCamBox2D.update();
+        spriteBatch.end();
+        renderer.render(oWorld, oCamBox2D.combined);
+    }
 
-		spriteBatch.setProjectionMatrix(oCamBox2D.combined);
-		spriteBatch.begin();
+    private void drawGameObjects() {
+        for (GameObject obj : arrGameObjects) {
+            TextureRegion keyframe;
 
-		drawFiguras();
+            if (obj.type == GameObject.BOX)
+                keyframe = box;
+            else
+                keyframe = ball;
 
-		spriteBatch.end();
-		renderer.render(oWorld, oCamBox2D.combined);
+            spriteBatch.draw(keyframe,
+                    obj.position.x - .15f,
+                    obj.position.y - .15f,
+                    .15f,
+                    .15f,
+                    .3f,
+                    .3f,
+                    1,
+                    1,
+                    obj.angleDeg);
+        }
+    }
 
-	}
+    @Override
+    public void dispose() {
+        oWorld.dispose();
+        super.dispose();
+    }
 
-	private void drawFiguras() {
-		Iterator<Figura> i = arrFiguras.iterator();
-		while (i.hasNext()) {
-			Figura obj = i.next();
-			TextureRegion keyframe;
+    static public class GameObject {
+        static final int BALL = 0;
+        static final int BOX = 1;
+        final int type;
+        float angleDeg;
+        Vector2 position;
 
-			if (obj.tipo == Figura.TIPO_CAJA)
-				keyframe = caja;
-			else
-				keyframe = pelota;
+        public GameObject(float x, float y, int type) {
+            position = new Vector2(x, y);
+            this.type = type;
+        }
 
-			spriteBatch.draw(keyframe, obj.position.x - .15f,
-					obj.position.y - .15f, .15f, .15f, .3f, .3f, 1, 1,
-					obj.angleDeg);
-
-		}
-
-	}
-
-	public class Figura {
-		static final int TIPO_PELOTA = 0;
-		static final int TIPO_CAJA = 1;
-		final int tipo;
-		Vector2 position;
-		float angleDeg;
-
-		public Figura(float x, float y, int tipo) {
-			position = new Vector2(x, y);
-			this.tipo = tipo;
-
-		}
-
-		public void update(Body body) {
-			position.x = body.getPosition().x;
-			position.y = body.getPosition().y;
-			angleDeg = (float) Math.toDegrees(body.getAngle());
-		}
-	}
+        public void update(Body body) {
+            position.x = body.getPosition().x;
+            position.y = body.getPosition().y;
+            angleDeg = (float) Math.toDegrees(body.getAngle());
+        }
+    }
 
 }

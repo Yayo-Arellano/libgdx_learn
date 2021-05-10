@@ -15,169 +15,147 @@ import com.nopalsoft.learn.MainLearn;
 import com.nopalsoft.learn.Screens;
 
 /**
- * Fuerzas, impulsos y velocidad lineal.
- * 
- * Puedes encontrar este tutorial en mi blog: http://tutoriales.tiarsoft.com/
- * 
- * @author Gerardo Arellano
- * 
+ * Learn more about libGDX:
+ * My personal blog (spanish): https://tinyurl.com/yw5hawc2
+ * Youtube video course: https://tinyurl.com/ytunwuad
+ *
+ * @author Yayo Arellano
  */
 
 public class Learn4 extends Screens {
 
-	Box2DDebugRenderer renderer;
-	World oWorld;
+    Box2DDebugRenderer renderer;
+    World oWorld;
 
-	/**
-	 * En este arreglo se van almacenar los cuerpos de las 3 pelotas
-	 */
-	Body[] arrPelotas;
+    Body[] arrBalls;
 
-	/**
-	 * Fuerza que aplicaremos a las 3 pelotas, es positiva en Y por lo que las pelotas deberan moverse hacia arriba
-	 */
-	Vector2 velocidad = new Vector2(0, 8);
+    // Same force will be applied to the 3 balls. It is positive in Y so balls should move upwards
+    Vector2 speed = new Vector2(0, 8);
 
-	public Learn4(MainLearn game) {
-		super(game);
-		Vector2 gravedad = new Vector2(0, -9.8f);
-		boolean dormir = true;
-		oWorld = new World(gravedad, dormir);
-		renderer = new Box2DDebugRenderer();
-		arrPelotas = new Body[3];
+    public Learn4(MainLearn game) {
+        super(game);
+        Vector2 gravity = new Vector2(0, -9.8f);
+        oWorld = new World(gravity, true);
 
-		crearPiso();
+        renderer = new Box2DDebugRenderer();
+        arrBalls = new Body[3];
 
-		crearPelotaIzquierda();
-		crearPelotaCentro();
-		crearPelotaDerecha();
+        createFloor();
 
-		/**
-		 * Aplicamos una fuerza a la pelota de la izquierda
-		 */
-		arrPelotas[0].applyForceToCenter(velocidad, true);
+        createLeftBall();
+        createCenterBall();
+        createRightBall();
 
-		/**
-		 * Aplicamos un impulso a la pelota del centro
-		 */
-		arrPelotas[1].applyLinearImpulse(velocidad,
-				arrPelotas[1].getWorldCenter(), true);
+        // Apply the force to the left ball
+        arrBalls[0].applyForceToCenter(speed, true);
 
-		/**
-		 * Aplicamos la velocidad linear a la pelota de la derecha
-		 */
-		arrPelotas[2].setLinearVelocity(velocidad);
+        // Apply the impulse to the center ball
+        arrBalls[1].applyLinearImpulse(speed, arrBalls[1].getWorldCenter(), true);
 
-	}
+        // Set the linear velocity to the right ball
+        arrBalls[2].setLinearVelocity(speed);
 
-	/**
-	 * Creamos el piso
-	 */
-	private void crearPiso() {
-		BodyDef bd = new BodyDef();
-		bd.position.set(0, .6f);
-		bd.type = BodyType.StaticBody;
+    }
 
-		EdgeShape shape = new EdgeShape();
-		shape.set(0, 0, WORLD_WIDTH, 0);
+    private void createFloor() {
+        BodyDef bd = new BodyDef();
+        bd.position.set(0, .6f);
+        bd.type = BodyType.StaticBody;
 
-		FixtureDef fixDef = new FixtureDef();
-		fixDef.shape = shape;
-		fixDef.friction = .7f;
+        EdgeShape shape = new EdgeShape();
+        shape.set(0, 0, WORLD_WIDTH, 0);
 
-		Body oBody = oWorld.createBody(bd);
-		oBody.createFixture(fixDef);
-		shape.dispose();
-	}
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+        fixDef.friction = .7f;
 
-	/**
-	 * Creamos la pelota de la izquierda en la posicion x= 2.5f y y=.8f con un radio de .25mts y una densidad de 15km/s^2
-	 */
-	private void crearPelotaIzquierda() {
-		BodyDef bd = new BodyDef();
-		bd.position.set(2.5f, .8f);
-		bd.type = BodyType.DynamicBody;
+        Body oBody = oWorld.createBody(bd);
+        oBody.createFixture(fixDef);
+        shape.dispose();
+    }
 
-		CircleShape shape = new CircleShape();
-		shape.setRadius(.25f);
+    private void createLeftBall() {
+        BodyDef bd = new BodyDef();
+        bd.position.set(2.5f, .8f);
+        bd.type = BodyType.DynamicBody;
 
-		FixtureDef fixDef = new FixtureDef();
-		fixDef.shape = shape;
-		fixDef.density = 15;
-		fixDef.friction = .5f;
-		fixDef.restitution = .5f;
+        CircleShape shape = new CircleShape();
+        shape.setRadius(.25f);
 
-		Body oBody = oWorld.createBody(bd);
-		oBody.createFixture(fixDef);
-		arrPelotas[0] = oBody;
-		shape.dispose();
-	}
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+        fixDef.density = 15;
+        fixDef.friction = .5f;
+        fixDef.restitution = .5f;
 
-	/**
-	 * Creamos la pelota del centro en la posicion x= 4f y y=.8f con un radio de .25mts y una densidad de 15km/s^2
-	 */
-	private void crearPelotaCentro() {
-		BodyDef bd = new BodyDef();
-		bd.position.set(4, .8f);
-		bd.type = BodyType.DynamicBody;
+        Body oBody = oWorld.createBody(bd);
+        oBody.createFixture(fixDef);
+        arrBalls[0] = oBody;
+        shape.dispose();
+    }
 
-		CircleShape shape = new CircleShape();
-		shape.setRadius(.25f);
+    private void createCenterBall() {
+        BodyDef bd = new BodyDef();
+        bd.position.set(4, .8f);
+        bd.type = BodyType.DynamicBody;
 
-		FixtureDef fixDef = new FixtureDef();
-		fixDef.shape = shape;
-		fixDef.density = 15;
-		fixDef.friction = .5f;
-		fixDef.restitution = .5f;
+        CircleShape shape = new CircleShape();
+        shape.setRadius(.25f);
 
-		Body oBody = oWorld.createBody(bd);
-		oBody.createFixture(fixDef);
-		arrPelotas[1] = oBody;
-		shape.dispose();
-	}
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+        fixDef.density = 15;
+        fixDef.friction = .5f;
+        fixDef.restitution = .5f;
 
-	/**
-	 * Creamos la pelota de la derecha en la posicion x= 5.5f y y=.8f con un radio de .25mts y una densidad de 15km/s^2
-	 */
-	private void crearPelotaDerecha() {
-		BodyDef bd = new BodyDef();
-		bd.position.set(5.5f, .8f);
-		bd.type = BodyType.DynamicBody;
+        Body oBody = oWorld.createBody(bd);
+        oBody.createFixture(fixDef);
+        arrBalls[1] = oBody;
+        shape.dispose();
+    }
 
-		CircleShape shape = new CircleShape();
-		shape.setRadius(.25f);
+    private void createRightBall() {
+        BodyDef bd = new BodyDef();
+        bd.position.set(5.5f, .8f);
+        bd.type = BodyType.DynamicBody;
 
-		FixtureDef fixDef = new FixtureDef();
-		fixDef.shape = shape;
-		fixDef.density = 15;
-		fixDef.friction = .5f;
-		fixDef.restitution = .5f;
+        CircleShape shape = new CircleShape();
+        shape.setRadius(.25f);
 
-		Body oBody = oWorld.createBody(bd);
-		oBody.createFixture(fixDef);
-		arrPelotas[2] = oBody;
-		shape.dispose();
-	}
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+        fixDef.density = 15;
+        fixDef.friction = .5f;
+        fixDef.restitution = .5f;
 
-	@Override
-	public void update(float delta) {
-		oWorld.step(delta, 8, 6);
+        Body oBody = oWorld.createBody(bd);
+        oBody.createFixture(fixDef);
+        arrBalls[2] = oBody;
+        shape.dispose();
+    }
 
-	}
+    @Override
+    public void update(float delta) {
+        oWorld.step(delta, 8, 6);
+    }
 
-	@Override
-	public void draw(float delta) {
-		oCamUI.update();
-		spriteBatch.setProjectionMatrix(oCamUI.combined);
+    @Override
+    public void draw(float delta) {
+        oCamUI.update();
+        spriteBatch.setProjectionMatrix(oCamUI.combined);
 
-		spriteBatch.begin();
-		Assets.font.draw(spriteBatch, "Fps:" + Gdx.graphics.getFramesPerSecond(),
-				0, 20);
-		spriteBatch.end();
+        spriteBatch.begin();
+        Assets.font.draw(spriteBatch, "Fps:" + Gdx.graphics.getFramesPerSecond(),
+                0, 20);
+        spriteBatch.end();
 
-		oCamBox2D.update();
-		renderer.render(oWorld, oCamBox2D.combined);
+        oCamBox2D.update();
+        renderer.render(oWorld, oCamBox2D.combined);
+    }
 
-	}
-
+    @Override
+    public void dispose() {
+        oWorld.dispose();
+        super.dispose();
+    }
 }
