@@ -48,7 +48,6 @@ public class Learn3 extends Screens {
 
         FixtureDef fixDef = new FixtureDef();
         fixDef.shape = shape;
-        fixDef.friction = .7f;
 
         Body oBody = oWorld.createBody(bd);
         oBody.createFixture(fixDef);
@@ -66,8 +65,8 @@ public class Learn3 extends Screens {
         FixtureDef fixDef = new FixtureDef();
         fixDef.shape = shape;
         fixDef.density = 1f;
-        fixDef.friction = 0f;
-        fixDef.restitution = 01f;
+        fixDef.friction = .7f;
+        fixDef.restitution = .7f;
 
         Body oBody = oWorld.createBody(bd);
         oBody.createFixture(fixDef);

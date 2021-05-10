@@ -50,8 +50,8 @@ public class Learn5 extends Screens {
         arrGameObjects = new Array<>();
 
         // Load the images
-        ball = new TextureRegion(new Texture(Gdx.files.internal("data/pelota.png")));
-        box = new TextureRegion(new Texture(Gdx.files.internal("data/caja.png")));
+        ball = new TextureRegion(new Texture(Gdx.files.internal("data/ball.png")));
+        box = new TextureRegion(new Texture(Gdx.files.internal("data/box.png")));
 
         createFloor();
         createBall();
@@ -127,6 +127,8 @@ public class Learn5 extends Screens {
 
     @Override
     public void update(float delta) {
+
+        // Every time we touch we create a new object
         if (Gdx.input.justTouched()) {
             if (MathUtils.randomBoolean())
                 createBox();

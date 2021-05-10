@@ -42,9 +42,9 @@ public class Learn4 extends Screens {
 
         createFloor();
 
-        createLeftBall();
-        createCenterBall();
-        createRightBall();
+        arrBalls[0] = createBall(2.5f, .8f); // Left Ball
+        arrBalls[1] = createBall(4.0f, .8f); // Center Ball
+        arrBalls[2] = createBall(5.5f, .8f); // Right Ball
 
         // Apply the force to the left ball
         arrBalls[0].applyForceToCenter(speed, true);
@@ -74,9 +74,9 @@ public class Learn4 extends Screens {
         shape.dispose();
     }
 
-    private void createLeftBall() {
+    private Body createBall(float positionX, float positionY) {
         BodyDef bd = new BodyDef();
-        bd.position.set(2.5f, .8f);
+        bd.position.set(positionX, positionY);
         bd.type = BodyType.DynamicBody;
 
         CircleShape shape = new CircleShape();
@@ -84,54 +84,14 @@ public class Learn4 extends Screens {
 
         FixtureDef fixDef = new FixtureDef();
         fixDef.shape = shape;
-        fixDef.density = 15;
+        fixDef.density = 11;
         fixDef.friction = .5f;
         fixDef.restitution = .5f;
 
         Body oBody = oWorld.createBody(bd);
         oBody.createFixture(fixDef);
-        arrBalls[0] = oBody;
         shape.dispose();
-    }
-
-    private void createCenterBall() {
-        BodyDef bd = new BodyDef();
-        bd.position.set(4, .8f);
-        bd.type = BodyType.DynamicBody;
-
-        CircleShape shape = new CircleShape();
-        shape.setRadius(.25f);
-
-        FixtureDef fixDef = new FixtureDef();
-        fixDef.shape = shape;
-        fixDef.density = 15;
-        fixDef.friction = .5f;
-        fixDef.restitution = .5f;
-
-        Body oBody = oWorld.createBody(bd);
-        oBody.createFixture(fixDef);
-        arrBalls[1] = oBody;
-        shape.dispose();
-    }
-
-    private void createRightBall() {
-        BodyDef bd = new BodyDef();
-        bd.position.set(5.5f, .8f);
-        bd.type = BodyType.DynamicBody;
-
-        CircleShape shape = new CircleShape();
-        shape.setRadius(.25f);
-
-        FixtureDef fixDef = new FixtureDef();
-        fixDef.shape = shape;
-        fixDef.density = 15;
-        fixDef.friction = .5f;
-        fixDef.restitution = .5f;
-
-        Body oBody = oWorld.createBody(bd);
-        oBody.createFixture(fixDef);
-        arrBalls[2] = oBody;
-        shape.dispose();
+        return oBody;
     }
 
     @Override
@@ -145,8 +105,7 @@ public class Learn4 extends Screens {
         spriteBatch.setProjectionMatrix(oCamUI.combined);
 
         spriteBatch.begin();
-        Assets.font.draw(spriteBatch, "Fps:" + Gdx.graphics.getFramesPerSecond(),
-                0, 20);
+        Assets.font.draw(spriteBatch, "fps:" + Gdx.graphics.getFramesPerSecond(), 0, 20);
         spriteBatch.end();
 
         oCamBox2D.update();
