@@ -197,7 +197,7 @@ public class Learn5 extends Screens {
         super.dispose();
     }
 
-    static public class GameObject {
+    static private class GameObject {
         static final int BALL = 0;
         static final int BOX = 1;
         final int type;

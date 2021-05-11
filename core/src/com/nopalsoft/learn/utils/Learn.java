@@ -13,7 +13,9 @@ public enum Learn {
     LEARN_2("Body Types: dynamic, static & kinematic"),
     LEARN_3("Friction, density & restitution"),
     LEARN_4("Forces, impulses & linear velocity"),
-    LEARN_5("Bodies & sprites");
+    LEARN_5("Bodies & sprites"),
+    LEARN_6("Collisions"),
+    LEARN_7("Collisions with animated sprites");
 
     public final String name;
 

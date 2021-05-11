@@ -58,6 +58,10 @@ public class MainMenuScreen extends Screens {
                 return new Learn4(game);
             case LEARN_5:
                 return new Learn5(game);
+            case LEARN_6:
+                return new Learn6(game);
+            case LEARN_7:
+                return new Learn7(game);
         }
     }
 
