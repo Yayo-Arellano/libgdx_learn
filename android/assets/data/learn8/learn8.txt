@@ -1,0 +1,90 @@
+
+learn8.png
+size: 570, 569
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+character_robot_duck
+  rotate: false
+  xy: 452, 417
+  size: 116, 150
+  orig: 192, 256
+  offset: 34, 0
+  index: -1
+character_robot_fall
+  rotate: false
+  xy: 2, 378
+  size: 185, 189
+  orig: 192, 256
+  offset: 6, 2
+  index: -1
+character_robot_idle
+  rotate: false
+  xy: 298, 198
+  size: 130, 182
+  orig: 192, 256
+  offset: 31, 0
+  index: -1
+character_robot_jump
+  rotate: false
+  xy: 2, 187
+  size: 163, 189
+  orig: 192, 256
+  offset: 17, 1
+  index: -1
+character_robot_walk0
+  rotate: false
+  xy: 2, 2
+  size: 150, 183
+  orig: 192, 256
+  offset: 14, 2
+  index: -1
+character_robot_walk1
+  rotate: false
+  xy: 307, 19
+  size: 129, 177
+  orig: 192, 256
+  offset: 24, 0
+  index: -1
+character_robot_walk2
+  rotate: false
+  xy: 430, 207
+  size: 118, 181
+  orig: 192, 256
+  offset: 34, 0
+  index: -1
+character_robot_walk3
+  rotate: false
+  xy: 189, 382
+  size: 129, 185
+  orig: 192, 256
+  offset: 23, 0
+  index: -1
+character_robot_walk4
+  rotate: false
+  xy: 154, 4
+  size: 151, 181
+  orig: 192, 256
+  offset: 13, 0
+  index: -1
+character_robot_walk5
+  rotate: false
+  xy: 320, 390
+  size: 130, 177
+  orig: 192, 256
+  offset: 23, 0
+  index: -1
+character_robot_walk6
+  rotate: false
+  xy: 438, 24
+  size: 118, 181
+  orig: 192, 256
+  offset: 34, 0
+  index: -1
+character_robot_walk7
+  rotate: false
+  xy: 167, 191
+  size: 129, 185
+  orig: 192, 256
+  offset: 23, 0
+  index: -1

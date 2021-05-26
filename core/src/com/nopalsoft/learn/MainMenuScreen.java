@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.nopalsoft.learn.tutoriales.*;
+import com.nopalsoft.learn.tutoriales.learn8.Learn8;
 import com.nopalsoft.learn.utils.Learn;
 
 /**
@@ -24,8 +25,7 @@ public class MainMenuScreen extends Screens {
         super(game);
 
         Table menu = new Table();
-        menu.setFillParent(true);
-        menu.defaults().uniform().fillY();
+        menu.defaults().expandY().fillY();
 
         for (final Learn tutorial : Learn.values()) {
             TextButton bt = new TextButton(tutorial.name, Assets.txButtonStyle);
@@ -36,7 +36,7 @@ public class MainMenuScreen extends Screens {
                 }
             });
 
-            menu.row().padTop(20).height(50);
+            menu.row().padTop(15).height(50);
             menu.add(bt).fillX();
         }
 
@@ -62,6 +62,8 @@ public class MainMenuScreen extends Screens {
                 return new Learn6(game);
             case LEARN_7:
                 return new Learn7(game);
+            case LEARN_8:
+                return new Learn8(game);
         }
     }
 

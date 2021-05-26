@@ -22,6 +22,9 @@ i:data/explosion/explosion4.png:data/explosion/explosion4-f211bd20454a002712747b
 i:data/explosion/explosion16.png:data/explosion/explosion16-13447ca104609a6312a7c399c4e2db76.png:9785:image/png:1
 i:data/explosion/explosion17.png:data/explosion/explosion17-3a6041c2e47a411a86f1da3e4f23948d.png:9421:image/png:1
 i:data/explosion/explosion5.png:data/explosion/explosion5-7eb70bc80f6bae9030309a2b9432297d.png:8844:image/png:1
+d:data/learn8:data/learn8:0:application/unknown:1
+t:data/learn8/learn8.txt:data/learn8/learn8-cb914fda34bc1784c6e804d893985e94.txt:2131:text/plain:1
+i:data/learn8/learn8.png:data/learn8/learn8-fe2c6614f09feb9375be2174f17078b2.png:290049:image/png:1
 i:data/ui.png:data/ui-71e9c6c001bb1ef3048450a00ac684e5.png:724:image/png:1
 i:data/box.png:data/box-4bf40099be02b24fcc84bfab83c4fb2d.png:14913:image/png:1
 t:com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:particles.fragment-b90524761fdf09b0a836056d590c30b8.glsl:820:application/unknown:1

@@ -15,7 +15,8 @@ public enum Learn {
     LEARN_4("Forces, impulses & linear velocity"),
     LEARN_5("Bodies & sprites"),
     LEARN_6("Collisions"),
-    LEARN_7("Collisions with animated sprites");
+    LEARN_7("Collisions with animated sprites"),
+    LEARN_8("Texture packer & animated sprites");
 
     public final String name;
 
