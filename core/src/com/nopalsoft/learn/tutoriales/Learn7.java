@@ -33,7 +33,6 @@ import com.nopalsoft.learn.utils.Utils;
  *
  * @author Yayo Arellano
  */
-
 public class Learn7 extends Screens {
 
     Box2DDebugRenderer renderer;

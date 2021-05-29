@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
  *
  * @author Yayo Arellano
  */
-
 public abstract class Screens extends InputAdapter implements Screen {
     public static final float SCREEN_WIDTH = 800;
     public static final float SCREEN_HEIGHT = 480;

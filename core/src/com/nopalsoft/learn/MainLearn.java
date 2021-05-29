@@ -10,7 +10,6 @@ import com.nopalsoft.learn.tutoriales.learn8.Learn8;
  *
  * @author Yayo Arellano
  */
-
 public class MainLearn extends Game {
 
     @Override

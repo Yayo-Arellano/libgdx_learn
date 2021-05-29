@@ -20,7 +20,6 @@ import com.nopalsoft.learn.Screens;
  *
  * @author Yayo Arellano
  */
-
 public class Learn1 extends Screens {
 
     Box2DDebugRenderer renderer;

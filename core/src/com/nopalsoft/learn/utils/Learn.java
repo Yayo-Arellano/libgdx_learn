@@ -7,7 +7,6 @@ package com.nopalsoft.learn.utils;
  *
  * @author Yayo Arellano
  */
-
 public enum Learn {
     LEARN_1("The world, bodies, figures and fixtures"),
     LEARN_2("Body Types: dynamic, static & kinematic"),

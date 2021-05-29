@@ -3,6 +3,13 @@ package com.nopalsoft.learn.tutoriales.learn8;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
+/**
+ * Learn more about libGDX:
+ * My personal blog (spanish): https://tinyurl.com/yw5hawc2
+ * Youtube video course: https://tinyurl.com/ytunwuad
+ *
+ * @author Yayo Arellano
+ */
 public class Robot {
     static final float WIDTH = .45f;
     static final float HEIGHT = .6f;
@@ -64,7 +71,6 @@ public class Robot {
             velocity.x = 0;
             isWalking = false;
         }
-
 
         if (isJumping) {
             if (velocity.y <= 0) {

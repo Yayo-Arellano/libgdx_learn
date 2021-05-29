@@ -20,7 +20,6 @@ import com.nopalsoft.learn.Screens;
  *
  * @author Yayo Arellano
  */
-
 public class Learn8 extends Screens {
 
     World oWorld;
@@ -106,6 +105,7 @@ public class Learn8 extends Screens {
 
         oWorld.step(delta, 8, 6);
         oWorld.getBodies(arrBodies);
+
         for (Body body : arrBodies) {
             if (body.getUserData() instanceof Robot) {
                 Robot obj = (Robot) body.getUserData();

@@ -16,7 +16,6 @@ import com.nopalsoft.learn.utils.Learn;
  *
  * @author Yayo Arellano
  */
-
 public class MainMenuScreen extends Screens {
 
     ScrollPane scroll;
